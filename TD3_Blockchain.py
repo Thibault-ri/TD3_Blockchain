@@ -67,6 +67,8 @@ def bid_ask(Nom_emmet,Nom_final):
 
 bid_ask("Cosmo","Loom Network")
 
+#lol
+
 
 
 
