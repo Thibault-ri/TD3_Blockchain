@@ -1,7 +1,10 @@
-import requests
+import requests,json
 from requests.auth import HTTPBasicAuth
 
 r = requests.get("https://api.pro.coinbase.com/currencies")
+
+
+
 
 def asso_id_nom(nom):
     name=""
@@ -34,40 +37,35 @@ def asso_id_nom(nom):
             L_currencies.append(name)    
     return(L_Id[ind-1])
 
-print(asso_id_nom("0x"))
+
 
 
 
 
 
 def currencies():
-    name=""
-    y=7
-    L_currencies=[]
-    r = requests.get("https://api.pro.coinbase.com/currencies")
-    text=r.text
-    for i in range(len(text)-4):
-        if (text[i:i+4]=="name"):
-            y=7
-            name=""
-            while(text[i+y]!='"'):
-                name+=text[i+y]
-                y=y+1
-            L_currencies.append(name)
+    currencies = requests.get('https://api.pro.coinbase.com/products')
+    r_json = json.loads(currencies.text)
+    L_c=[]
+    curr=""
     print("Les monnaies disponibles sont: \n")
-    for i in range(len(L_currencies)):
-        print(str(i+1)+" : "+L_currencies[i])
+    for i in r_json:
+        curr=i['base_currency']
+        if curr not in L_c:
+            L_c.append(curr)
+            print(str(len(L_c))+" : "+curr)
+        
+
+
+def getDepth(direction='ask', pair = 'BTC-USD'):
+    r = requests.get("https://api.pro.coinbase.com//products/"+pair+"/book")
+    text_j=json.loads(r.text)
+    print(text_j[direction+'s'])
+
+    
 
 
 
-def bid_ask(Nom_emmet,Nom_final):
-    r = requests.get("https://api.pro.coinbase.com//products/"+asso_id_nom(Nom_emmet)+"-"+asso_id_nom(Nom_final)+"/book")
-    text=r.text
-    print(text)
-
-bid_ask("Cosmo","Loom Network")
-
-#lol
 
 
 
