@@ -1,4 +1,4 @@
-# TD3_Blockchain
+# TD3_Blockchain Boudon/RIEUL
 Repo de rendu du TD3
 
 asso_id_nom(nom): renvoie l'id d une monnaie lorsque l on rentre son nom
